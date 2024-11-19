@@ -1,8 +1,18 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Routes } from '@angular/router';
+import { importProvidersFrom } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
-import { routes } from './app.routes';
+import { AppComponent } from './app.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+
+const routes: Routes = [{ path: '', component: ProductListComponent }];
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes)]
+  providers: [
+    provideRouter(routes),
+    importProvidersFrom(BrowserModule, HttpClientModule, CommonModule),
+  ],
 };
